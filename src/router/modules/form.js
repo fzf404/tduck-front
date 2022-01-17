@@ -43,6 +43,12 @@ export default [
                 path: 'statistics',
                 meta: {requireLogin: true},
                 component: () => import(/* webpackChunkName: 'root' */ '@/views/form/statistics')
+            },
+            // 审阅路由
+            {
+                path: 'check',
+                meta: {requireLogin: true},
+                component: () => import(/* webpackChunkName: 'root' */ '@/views/form/check')
             }
         ]
     }

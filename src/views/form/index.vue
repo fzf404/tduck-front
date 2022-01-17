@@ -82,6 +82,11 @@ export default {
                     title: '统计',
                     icon: 'el-icon-data-line',
                     route: '/project/form/statistics'
+                // 审阅功能跳转
+                }, {
+                    title: '审阅',
+                    icon: 'el-icon-circle-check',
+                    route: '/project/form/check'
                 }
             ]
         }

@@ -20,7 +20,7 @@ import chart from './chart'
 import analysis from './analysis'
 
 export default {
-    name: 'ProjectStatistics',
+    name: 'ProjectCheck',
     components: {
         list,
         chart,

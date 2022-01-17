@@ -91,16 +91,21 @@ export default {
                 {
                     route: '/home',
                     name: '工作台',
-                    icon: 'fas fa-laptop'
+                    icon: 'el-icon-s-platform'
+                },
+                {
+                    route: '/project/todo',
+                    name: '任务问卷',
+                    icon: 'el-icon-s-order'
                 },
                 {
                     route: '/project/template',
                     name: '模板中心',
-                    icon: 'fas fa-clipboard'
+                    icon: 'el-icon-s-goods'
                 }, {
                     route: '/project/recycle',
                     name: '回收站',
-                    icon: 'fas fa-user'
+                    icon: 'el-icon-delete-solid'
                 }
             ]
         }
