@@ -86,7 +86,7 @@ export default {
                     () => {
                         Message({
                             message: '复制失败，请手动复制',
-                            type: 'danger',
+                            type: 'error',
                             duration: 3 * 1000
                         })
                     },

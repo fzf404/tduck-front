@@ -97,6 +97,12 @@ api.interceptors.response.use(
                 })
             }
             return Promise.reject(res)
+        } else if (res.code === 404) {
+            Message({
+                message: res.msg || 'Error',
+                type: 'warning',
+                duration: 5 * 1000
+            })
         } else if (res.code === 416) {
             // 需要滑动验证
             let result = {}
