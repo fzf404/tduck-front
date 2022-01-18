@@ -216,7 +216,7 @@ export default {
         }
     },
     created() {
-        this.queryProjectPage()
+        this.getAllSubUser()
     },
     methods: {
         // 切换展示方式
@@ -225,20 +225,20 @@ export default {
         },
 
         // 请求全部问卷
-        queryProjectPage() {
-            this.$api.get('user/score/get_parent_user_projects').then(res => {
+        getAllSubUser() {
+            this.$api.get('/user/score/get_parent_user_projects').then(res => {
                 this.projectList = res.data
                 this.projectListLoading = false
             })
         },
 
-        // 填写
+        // 填写问卷二维码
         writeHandle(projectKey) {
             const url = `${window.location.protocol}//${window.location.host}/s/${projectKey}`
             this.writeLink = url
             this.qrCodeVisible = true
         },
-
+        // 获取评分内容
         getRate(projectKey) {
             Message({
                 message: '请求中',

@@ -41,6 +41,8 @@
                 <el-aside width="280px">
                     <el-card>
                         <el-button type="primary" @click="createBlankTemplate">新建项目</el-button>
+                        <div />
+                        <el-button type="success" @click="joinUser">填写加入码</el-button>
                         <div class="menu-view">
                             <div v-for="menu in menuList" :key="menu.route"
                                  :class="defaultActiveMenu==menu.route?'menu-item-active menu-item':'menu-item'"
@@ -50,26 +52,26 @@
                                 <span>{{ menu.name }}</span>
                             </div>
                         </div>
-                        <div class="text-center">
+                        <!-- <div class="text-center">
                             <h5>加入社群</h5>
                             <el-image
                                 fit="fill"
                                 src="https://oss.smileyi.top/static/wx-qrcode.png"
                                 style="width: 200px; height: 200px;"
                             />
-                        </div>
+                        </div> -->
                     </el-card>
                 </el-aside>
                 <el-container>
                     <el-main>
                         <router-view />
                     </el-main>
-                    <el-footer>
+                    <!-- <el-footer>
                         <div class="about-container">
                             <font-icon class="fas fa-user" />
                             <span class="desc-text">关于填鸭</span>
                         </div>
-                    </el-footer>
+                    </el-footer> -->
                 </el-container>
             </el-container>
         </el-container>
@@ -94,11 +96,6 @@ export default {
                     icon: 'el-icon-s-platform'
                 },
                 {
-                    route: '/project/todo',
-                    name: '任务问卷',
-                    icon: 'el-icon-s-order'
-                },
-                {
                     route: '/project/template',
                     name: '模板中心',
                     icon: 'el-icon-s-goods'
@@ -106,6 +103,20 @@ export default {
                     route: '/project/recycle',
                     name: '回收站',
                     icon: 'el-icon-delete-solid'
+                },
+                // 占位菜单
+                {
+                    name: ''
+                },
+                {
+                    route: '/project/todo',
+                    name: '任务问卷',
+                    icon: 'el-icon-s-order'
+                },
+                {
+                    route: '/project/sub',
+                    name: '下级用户管理',
+                    icon: 'el-icon-s-tools'
                 }
             ]
         }
@@ -151,6 +162,25 @@ export default {
                 })
             }).catch(() => {
 
+            })
+        },
+        joinUser() {
+            this.$prompt('请输入加入码', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消'
+            }).then(({ value }) => {
+                this.$api.get(`http://wxtest.dazecake.moe/tduck-api/user/relation/join/${value}`).then(
+                    res => {
+                        this.$message({
+                            type: 'success',
+                            message: res.msg
+                        })
+                    })
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '取消输入'
+                })  
             })
         }
     }

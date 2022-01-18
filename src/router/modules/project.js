@@ -9,12 +9,6 @@ export default [
                 meta: {requireLogin: true},
                 component: () => import(/* webpackChunkName: 'root' */ '@/views/project/my/index')
             },
-            // 上级用户的任务
-            {
-                path: 'todo',
-                meta: {requireLogin: true},
-                component: () => import(/* webpackChunkName: 'root' */ '@/views/project/todo/index')
-            },
             {
                 path: 'recycle',
                 meta: {requireLogin: true},
@@ -25,11 +19,22 @@ export default [
                 meta: {requireLogin: true},
                 component: () => import(/* webpackChunkName: 'root' */ '@/views/project/template/index')
             },
-
             {
                 path: 'template/preview',
                 meta: {requireLogin: true},
                 component: () => import(/* webpackChunkName: 'root' */ '@/views/project/template/preview.vue')
+            },
+            // 上级用户的任务
+            {
+                path: 'todo',
+                meta: {requireLogin: true},
+                component: () => import(/* webpackChunkName: 'root' */ '@/views/project/todo/index')
+            },
+            // 下级用户管理
+            {
+                path: 'sub',
+                meta: {requireLogin: true},
+                component: () => import(/* webpackChunkName: 'root' */ '@/views/project/sub/index')
             }
         ]
     },

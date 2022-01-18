@@ -115,23 +115,11 @@ export default {
             customFilterDialogVisible: false,
             customColumnDialogVisible: false,
             checkedFilterColumns: [],
-            // // 固定自定义列 如序号等
-            // fixedCustomColumns: fixedDefaultFormColumn,
-            // fixedFormTailColumns: fixedDefaultFormTailColumn,
-            // // 选中的
-            // checkedFixedCustomColumns: fixedDefaultFormColumn,
-            // fixedDefaultLabelFormColumn: fixedDefaultLabelFormColumn,
-            // checkedFixedTailCustomColumns: fixedDefaultFormTailColumn,
-            // fixedDefaultLabelFormTailColumn: fixedDefaultLabelFormTailColumn,
-            // 自定义表单属性
-            // checkOtherCustomColumns: [],
-            // otherCustomColumns: [],
+
             projectResultList: [],
             projectItemList: [],
             projectData: null,
             projectItemColumns: {},
-            // 填写信息侧边栏
-            // detailDrawer: false,
             // 填写信息详情
             activeResultRow: null,
             // 评分侧边栏
