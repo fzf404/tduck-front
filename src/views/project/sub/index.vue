@@ -12,7 +12,7 @@
                 <el-table-column
                     header-align="center"
                     align="center"
-                    prop="userId"
+                    prop="id"
                     label="用户ID"
                 />
 
