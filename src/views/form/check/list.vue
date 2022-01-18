@@ -1,31 +1,5 @@
 <template>
     <div class="statistics-container">
-        <!-- <div class="filter-table-view">
-            <el-form ref="filterForm" :inline="true">
-                <el-form-item label="提交时间" prop="endDateTime">
-                    <el-date-picker
-                        v-model="queryConditions.beginDateTime"
-                        placeholder="开始时间"
-                        type="datetime"
-                        value-format="yyyy-MM-dd HH:mm:ss"
-                    />
-                    <span> 至 </span>
-                    <el-date-picker
-                        v-model="queryConditions.endDateTime"
-                        :default-time="'23:59:59'"
-                        placeholder="结束时间"
-                        type="datetime"
-                        value-format="yyyy-MM-dd HH:mm:ss"
-                    />
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="queryProjectResult">查询</el-button>
-                    <el-button type="primary" @click="conditionFilterHandle">条件</el-button>
-                    <el-button type="success" @click="exportProjectResult">导出</el-button>
-                    <el-button type="success" @click="downloadProjectResultFile">下载附件</el-button>
-                </el-form-item>
-            </el-form>
-        </div> -->
         <div class="result-table-view">
             <!-- 表头绑定 -->
             <el-table

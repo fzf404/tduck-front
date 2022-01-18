@@ -237,7 +237,7 @@ export default {
                 that.screenWidth = window.screenWidth
             })()
         }
-        this.msgCard()
+        // this.msgCard()
     },
     methods: {
         // 屏幕滚动方法
@@ -298,18 +298,18 @@ export default {
         onStart() {
             // window.location.href = 'https://gitee.com/TDuckApp/tduck-platform'
             window.open('https://gitee.com/TDuckApp/tduck-platform', '_blank')
-        },
-        msgCard() {
-            // <a href="https://gitee.com/TDuckApp/tduck-platform" target="_blank">3798</a>
-            this.$notify({
-                title: '关注下 Star 数',
-                duration: 0,
-                position: 'bottom-left',
-                customClass: 'notify-success',
-                dangerouslyUseHTMLString: true,
-                message: '<div style="line-height: 30px">我们需要您的支持，请点击按钮帮助我们增加 gitee star。<span class="github-btn"><a href="https://gitee.com/TDuckApp/tduck-platform" target="_blank">Start</a></span></div>'
-            })
         }
+        // msgCard() {
+        //     // <a href="https://gitee.com/TDuckApp/tduck-platform" target="_blank">3798</a>
+        //     this.$notify({
+        //         title: '关注下 Star 数',
+        //         duration: 0,
+        //         position: 'bottom-left',
+        //         customClass: 'notify-success',
+        //         dangerouslyUseHTMLString: true,
+        //         message: '<div style="line-height: 30px">我们需要您的支持，请点击按钮帮助我们增加 gitee star。<span class="github-btn"><a href="https://gitee.com/TDuckApp/tduck-platform" target="_blank">Start</a></span></div>'
+        //     })
+        // }
     }
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
     <div class="my-project-container">
+        <!-- 布局切换 -->
         <div class="filter-view fr">
             <div>
                 <span @click="switchDataShowTypeHandle('gird')">
@@ -16,6 +17,7 @@
                 </span>
             </div>
         </div>
+        <!-- gird 布局展示 -->
         <div v-if="dataShowType=='gird'" class="project-grid-container">
             <div
                 v-if="projectList.length"
@@ -49,7 +51,7 @@
                         </el-button>
                         <span>
                             <el-button
-                                v-if="p.status!=1" type="text" @click="checkHandle(p.key)"
+                                v-if="p.status!=1" type="text" @click="getRate(p.key)"
                             >
                                 <i class="el-icon-data-analysis" />
                                 查看评分
@@ -62,6 +64,7 @@
                 <data-empty />
             </div>
         </div>
+        <!-- table 格式 -->
         <div v-if="dataShowType=='table'" class="project-table-view">
             <el-table
                 :data="projectList"
@@ -121,7 +124,7 @@
                                 v-if="scope.row.status!=1"
                                 class="green-text-btn"
                                 type="text"
-                                @click="checkHandle(scope.row.key)"
+                                @click="getRate(scope.row.key)"
                             >
                                 查看评分
                             </el-button>
@@ -130,10 +133,32 @@
                 </el-table-column>
             </el-table>
         </div>
+        <!-- 填写二维码 -->
+        <el-dialog title="扫码填写" :visible.sync="qrCodeVisible" width="240px">
+            <vue-qr v-if="writeLink" :size="194" :text="writeLink" />
+        </el-dialog>
+        <!-- 评分内容查看 -->
+        <el-dialog title="评分详情" :visible.sync="rateVisible" width="400px">
+            <el-rate
+                v-model="rateData.score"
+                disabled
+                show-score
+                text-color="#ff9900"
+            />
+            <el-divider />
+            <el-input
+                v-model="rateData.comment" 
+                type="textarea"
+                :rows="3"
+                disabled
+            />
+        </el-dialog>
     </div>
 </template>
 <script>
 import dayjs from 'dayjs'
+import VueQr from 'vue-qr'
+import {Message} from 'element-ui'
 
 let projectStatusList = [
     {code: 1, name: '未发布', color: '#006EFF'},
@@ -143,6 +168,9 @@ let projectStatusList = [
 
 export default {
     name: 'TODO',
+    components: {
+        VueQr
+    },
     filters: {
         formatDate(time) {
             return dayjs(time).format('YYYY/MM/DD')
@@ -160,6 +188,17 @@ export default {
             //     endDateTime: null,
             //     status: null
             // },
+
+            // 填写地址
+            writeLink: null,
+            // 模态框展示
+            qrCodeVisible: false,
+            // 评分查看
+            rateVisible: false,
+            rateData: {
+                score: 0,
+                comments: ''
+            },
             projectStatusList: projectStatusList,
             projectList: [],
             projectListLoading: true
@@ -180,28 +219,11 @@ export default {
         this.queryProjectPage()
     },
     methods: {
+        // 切换展示方式
         switchDataShowTypeHandle(type) {
             this.dataShowType = type
         },
-        // writeHandle(key, type) {
-        //     this.$router.push({path: `/project/form/${type}`, query: {key: key, active: type}})
-        // },
-        // deleteProject(key) {
-        //     this.$api.post('/user/project/delete', {'key': key}).then(res => {
-        //         if (res.data) {
-        //             this.msgSuccess('刪除成功')
-        //             this.queryProjectPage()
-        //         }
-        //     })
-        // },
-        // stopProject(key) {
-        //     this.$api.post('/user/project/stop', {'key': key}).then(res => {
-        //         if (res.data) {
-        //             this.msgSuccess('停止成功')
-        //             this.queryProjectPage()
-        //         }
-        //     })
-        // },
+
         // 请求全部问卷
         queryProjectPage() {
             this.$api.get('user/score/get_parent_user_projects').then(res => {
@@ -209,10 +231,25 @@ export default {
                 this.projectListLoading = false
             })
         },
+
         // 填写
         writeHandle(projectKey) {
             const url = `${window.location.protocol}//${window.location.host}/s/${projectKey}`
-            console.log(url)
+            this.writeLink = url
+            this.qrCodeVisible = true
+        },
+
+        getRate(projectKey) {
+            Message({
+                message: '请求中',
+                type: 'warning',
+                duration: 2 * 1000
+            })
+            this.$api.get('/user/score/get_score', {params: {'project_key': projectKey}}).then(
+                res => { 
+                    this.rateData = res.data 
+                    this.rateVisible = true
+                })
         }
     }
 }
